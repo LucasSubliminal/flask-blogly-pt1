@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="POST">
+        <p>First Name</p>
+        <input type-="text" placeholder="{{first}}"></input>
+        <p>Last Name</p>
+        <input type-="text" placeholder="{{last}}"></input>
+        <p>Image URL</p>
+        <input type-="text" placeholder="{{img_url}}"></input>
+        <button type="submit">Cancel</button>
+        <button type="submit">Save</button>
+
+    </form>
+   
+
+{% endblock %}
