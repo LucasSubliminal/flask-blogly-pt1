@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, request, redirect, render_template
-from models import db, connect_db, User
+from models import db, connect_db, User, Post
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -24,11 +24,15 @@ def list_names():
     users = User.query.order_by(User.last_name, User.first_name).all()
     return render_template('users/home.html', title="Users", users=users)
 
-@app.route('/createusers')
+@app.route('/users/new', )
 def create_user():
     """ Redirects users to the create users form """
-    
+
     return render_template('users/createusers.html', title="Create a User")
+@app.route('/users/new' , methods=["POST"])
+def  add_user():
+    """ Adds new user to database and """
+
 
 @app.route('/users/<int:user_id>')
 def user_detail_page(user_id):
@@ -38,10 +42,10 @@ def user_detail_page(user_id):
     user = User.query.get(user_id)
     img_url = user.image_url
     id_user= User.query.get_or_404(user_id)
+    posts = Post.query.filter_by(user_id=user_id).order_by(Post.title).all()
 
 
-
-    return render_template('users/userdetailpage.html', users = users, img_url=img_url, id_user=id_user, user=user)
+    return render_template('users/userdetailpage.html', users = users, img_url=img_url, id_user=id_user, user=user, posts=posts)
 
 @app.route('/users/editpage/<int:user_id>')
 def edit_profile(user_id):
@@ -62,3 +66,27 @@ def users_destroy(user_id):
     db.session.commit()
 
     return redirect("/users")
+
+@app.route('/users/<int:user_id>/posts/new')
+def add_post(user_id):
+    """Returns page to add a new post for specific user """
+    user = User.query.get(user_id)
+    full_name = user.full_name 
+    return render_template('users/newposts.html', title=f"Add Post for {full_name}")
+
+@app.route('/posts/<int:post_id>')
+def  show_post(post_id):
+    """ Show posts page"""
+    post = Post.query.get_or_404(post_id)
+    content = post.content
+    user = post.user
+    full_name= user.full_name
+
+    return render_template('users/postpage.html', title='First Post!', content=content, user=user, full_name=full_name, post=post)
+
+@app.route('/posts/<int:post_id>/edit')
+def edit_posts(post_id):
+    """ Edits posts """
+    post = Post.query.get(post_id)
+
+    return render_template('users/editpost.html', post=post)

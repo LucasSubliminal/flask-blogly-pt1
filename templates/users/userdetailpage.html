@@ -15,6 +15,18 @@
     <button class="btn btn-danger btn-sm"
               formaction="/users/{{ user.id }}/delete"
               formmethod="POST">Delete
-      </button>
+    </button>
+    <h2>Posts</h2>
+    <ol>
+        {% for post in posts %}
+        <li>
+            <a href="/posts/{{user.id}}">{{ post.title }}</a>
+
+        </li>
+        {% endfor %}
+    </ol>
+    <p>
+        <a href="/users/{{user.id}}/posts/new"">Add Post</a>
+    </p>
 </body>
 </html>

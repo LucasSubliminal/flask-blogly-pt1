@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p>{{post.content}}</p>
+    <p>By {{full_name}}</p>
+    <button>Cancel</button>
+    <a href="posts/{{posts.id}}/edit">Edit</a>
+    <button>Delete</button>
+{% endblock %}
