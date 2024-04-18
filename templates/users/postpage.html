@@ -4,6 +4,11 @@
     <p>{{post.content}}</p>
     <p>By {{full_name}}</p>
     <button>Cancel</button>
-    <a href="posts/{{posts.id}}/edit">Edit</a>
-    <button>Delete</button>
+    <form action="/posts/{{ post.id }}/edit" method="GET">
+        <button type="submit">Edit</button>
+    </form>
+    <form action="/posts/{{ post.id }}/delete" method="POST">
+        <button>Delete</button>
+    </form>
+    
 {% endblock %}

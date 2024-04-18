@@ -10,17 +10,18 @@
     
 
     <h1>{{user.full_name}}</h1>
+    <form action="/users/{{ user.id }}/edit" method="GET">
+    <button class="btn btn-primary btn-sm">Edit</button>
+    </form>
+    <form action="/users/{{ user.id }}/delete" method="POST">
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+    </form>
     
-    <a href="editpage/{{id_user.id}}"><p>Edit</p></a>
-    <button class="btn btn-danger btn-sm"
-              formaction="/users/{{ user.id }}/delete"
-              formmethod="POST">Delete
-    </button>
     <h2>Posts</h2>
     <ol>
         {% for post in posts %}
         <li>
-            <a href="/posts/{{user.id}}">{{ post.title }}</a>
+            <a href="/users/posts/{{user.id}}">{{ post.title }}</a>
 
         </li>
         {% endfor %}

@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form action=""method="POST">
+    <form method="POST">
         <p>First Name</p>
-        <input type-="text" placeholder="{{first}}"></input>
+        <input type-="text" placeholder="{{first}}" name="first_name"></input>
         <p>Last Name</p>
-        <input type-="text" placeholder="{{last}}"></input>
+        <input type-="text" placeholder="{{last}}" name="last_name"></input>
         <p>Image URL</p>
-        <input type-="text" placeholder="{{img_url}}"></input>
+        <input type-="text" placeholder="{{img_url}}" name="image_url"></input>
         <button type="submit">Cancel</button>
         <button type="submit">Save</button>
 
